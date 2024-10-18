@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Policy {
+  id           String   @id @default(cuid())
+  policyNumber String   @unique
+  name         String
+  basePrice    Decimal
+  typeOfPolicy String
+
+  // Optional customer relation
+  customerId   String? // Foreign key, optional
+  customer     Customer? @relation(fields: [customerId], references: [id])
+}
+
+model Customer {
+  id        String   @id @default(cuid())
+  firstName String
+  lastName  String
+  email     String   @unique
+
+  // A customer can have multiple policies
+  policies  Policy[]
+}
+

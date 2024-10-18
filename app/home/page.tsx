@@ -1,4 +1,4 @@
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../components/Sidebar";
 const Home = () => {
   return (
     <div className="flex min-h-screen bg-gray-100 text-black">
